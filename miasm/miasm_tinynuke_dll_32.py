@@ -27,7 +27,7 @@ def stop(jitter):
 
 def get_breakpoint_address(filename):
 
-	yara_rule = """	rule ahmed_tinynuke {
+	yara_rule = """	rule dll_tinynuke {
 
 		strings:
 		$hex = { 32 04 31 88 06 8B 45 10 40 89 45 10 3B C3 72 D2 5E 8B C7 5F 5B 5D C3 55 8B EC }
