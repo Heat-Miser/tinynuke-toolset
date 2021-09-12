@@ -6,6 +6,8 @@ They are based on [Miasm reverse engineering framework](https://github.com/cea-s
 
 This framework permits us to instrument the code present in binaries. I leveraged that functionality to unxor the obfuscated strings.
 
+A special thanks to CEA Sec team (former and current members) and to [Sebdraven](https://twitter.com/sebdraven) for helping me to write those scripts!
+
 ## How it works ?
 
 1. you need to find the unxor function, for that I use a yara signature
