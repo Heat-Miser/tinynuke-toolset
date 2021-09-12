@@ -17,7 +17,7 @@ The scripts are configured to stop after having discovered the PHP endpont, so i
 
 ## How to use ?
 
-Miasm is pretty cool but a bit painful to install on several OS, so I provide a Dockerfile.
+Miasm is pretty cool but a bit painful to install on several OS, so I provide a Dockerfile based on the official miasm/base image (thanks a lot Camille for that 👍️)
 
 First, build the docker image by moving to the miasm directory and using the following command
 
