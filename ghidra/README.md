@@ -2,7 +2,7 @@
 
 you can load those scripts in your Ghidra by adding the corresponding directory in the loaded dirs of the Script managers.
 
-![dirs ghidra](https://raw.githubusercontent.com/heat-miser/tinynuke-toolset/main/screenshots/script_dirs_ghidra.png?raw=true)
+![dirs ghidra](https://raw.githubusercontent.com/heat-miser/tinynuke-toolset/main/screenshots/scripts_dirs_ghidra.png?raw=true)
 
 You'll then find a new category in the script manager called "Tinynuke" with those 3 scripts in it.
 
@@ -36,8 +36,26 @@ A prompt will then ask you the unxor function name and every xored string will b
 
 ![unxored strings](https://raw.githubusercontent.com/heat-miser/tinynuke-toolset/main/screenshots/unxored_strings.png?raw=true)
 
-The two first ones contains the C2 address and the PHP endpoint.
+The two first ones contain the C2 address and the PHP endpoint.
 
 ## TinynukeGetprocAddress.py
 
 This script has been written to be run on a main Tinynuke DLL extracted from the C2 or from the loaded (see previous script or Dll Extractor).
+
+By using the previous script, you'll quickly notice that most of the decoded strings are DLL and functions names. They're used to load functions dynamically using GetProcAddress.
+
+It's another common obfuscation mechanism used in a lot of malware. The goal is to avoid having obvious imports which could help reversing the sample.
+
+By scrolling in the code of Tinynuke DLL config loader function, you'll find easily a piece of code resolving the different imports dynamically.
+
+![dynamic getprocaddress](https://raw.githubusercontent.com/heat-miser/tinynuke-toolset/main/screenshots/dynamic_getproc.png?raw=true)
+
+There is unique explicite getProcAddress call used to dynamically load getProcAddress (🤷‍♂️) then you'll find a lot of call to the getProcAdress handle with two parameters:
+* a function name
+* a library handle
+
+This scripts takes advantage of that to rename the different pointers in the code used to store the different function handles. Execute the script and it will prompt you the name of the label used to store the dynamically loaded getProcAddress (you can rename it but in the screenshot DAT_100163b4), it'll then find automatically the different parameters and rename the different handles in the binary to help further analysis.
+
+![dynamic getprocaddress](https://raw.githubusercontent.com/heat-miser/tinynuke-toolset/main/screenshots/handles_resolved.png?raw=true)
+
+
