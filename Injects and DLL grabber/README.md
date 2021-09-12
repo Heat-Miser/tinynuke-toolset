@@ -15,8 +15,8 @@ The protocol used by Tinynuke is quite simple.
 
 The script does all that for you in one shot and store the collected files in the current directory with the following name: 
 * `<c2 hostname>_tinynuke_config_<datetime>.json`
-* `<c2 hostname>s_tinynuke_32bin_<datetime>.bin`
-* `<c2 hostname>s_tinynuke_64bin_<datetime>.bin`
+* `<c2 hostname>_tinynuke_32bin_<datetime>.bin`
+* `<c2 hostname>_tinynuke_64bin_<datetime>.bin`
 
 Usage examples:
 
