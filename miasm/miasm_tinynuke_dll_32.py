@@ -13,13 +13,13 @@ if filename and os.path.isfile(filename):
 
 def create_sentinel(jitter):
 	a = jitter.get_str_ansi(jitter.cpu.EAX)
-	print a
+	print(a)
 	if ".php" in jitter.get_str_ansi(jitter.cpu.EAX):
 	    jitter.run = False
 	return True
 
 def stop(jitter):
-	print "No admin found !"
+	print("No admin found !")
 	jitter.run = False
 	return True
 
