@@ -90,9 +90,10 @@ def main():
         #Creating a repeatable comment at address with unxored value
         comment_addr = param_address
         listing = currentProgram.getListing()
-        codeUnit = listing.getCodeUnitAt(comment_addr)
+        codeUnit = listing.getCodeUnitAt(toAddr(comment_addr.toString()))
         codeUnit.setComment(codeUnit.REPEATABLE_COMMENT, '[*] ' + unxor(key, value, int_size))
         print(unxor(key, value, int_size))
+
 
 if __name__ == "__main__":
     main()
