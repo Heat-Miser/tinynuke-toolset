@@ -11,10 +11,10 @@ headers = {
 }
 
 def xor(s, key):
-    res = ""
+    res = []
     for i in range(len(s)):
-        res += chr(s[i] ^ ord(key[i % len(key)]))
-    return res
+        res += [s[i] ^ ord(key[i % len(key)])]
+    return bytearray(res)
 
 
 def get_key(c2, url, tls, botid, proxy):
@@ -39,7 +39,7 @@ def get_key(c2, url, tls, botid, proxy):
 def get_injects(c2, url, tls, botid, key, proxy):
     print("Getting config for %s" % (c2))
     config = requests.post("http%s://%s%s?%s" % ( "s" if tls else "", c2, url, botid), data = xor(bytearray("injects|", "ascii"), key), proxies=proxy, headers=headers)
-    return xor(config.content, key).replace(botid, "<BOTID>")
+    return xor(config.content, key).decode().replace(botid, "<BOTID>")
 
 def get_32bits_binary(c2, url, tls, botid, key, proxy):
     print("Getting 32 bits binary for %s" % (c2))
@@ -108,7 +108,7 @@ if __name__ == '__main__':
                 with open(bin_32_filename, "w") as o:
                     o.write(bin32)
     else:
-        with open(bin_32_filename, "w") as o:
+        with open(bin_32_filename, "wb") as o:
             o.write(bin32)
 
     if args.ref_64_binary:
@@ -122,5 +122,5 @@ if __name__ == '__main__':
                 with open(bin_64_filename, "w") as o:
                     o.write(bin64)
     else:
-        with open(bin_64_filename, "w") as o:
+        with open(bin_64_filename, "wb") as o:
             o.write(bin64)
