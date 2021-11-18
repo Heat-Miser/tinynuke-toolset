@@ -1,6 +1,7 @@
 # tinynuke-toolset
 
-You'll find in that repository a set of tools and scripts I developped to analyze Tinynuke samples.
+You'll find in that repository a set of tools and scripts I developped to analyze Tinynuke samples sent to French targets since 2018.
+You'll find the full story here: https://blog.heat-miser.net/posts/tinynuke/
 
 * Dll extractor: script used to extract the main Tinynuke DLL from the loader
 * ghidra: set of Ghidra scripts allowing researchers to decode strings and resolve libraries dynamic loading
