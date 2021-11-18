@@ -59,3 +59,20 @@ This scripts takes advantage of that to rename the different pointers in the cod
 ![dynamic getprocaddress](https://raw.githubusercontent.com/heat-miser/tinynuke-toolset/main/screenshots/handles_resolved.png?raw=true)
 
 
+## TinynukePackerDeobfuscation.py
+
+This script has been developped to deal with the latest version of Tinynuke (which appeared circa 10th of November 2021). In those versions the intermediate packing mechanism has been obfuscated to make the unpacking a bit harder.
+
+If you open [one of the latest payloads](https://www.virustotal.com/gui/file/8fce366f8b2dadd9dfff768490209d50a4f67dade7c5442c94ae012c92f17e03/detection) and open the embbeded `data.dll` you'll probably struggle to find the xor key to extract the level two DLL, that's because noise has been hadded in the threat function in charge of that part.
+
+If you try to decompile it using Ghidra, the decompiler will probably rage quit facing the big amount of useless instructions added into that function.
+
+That scripts has been developped to avoid overloading the decompiler. You just have to find the created thread entry in the DLL (just follow the DLL entry) and it will detect the useless instruction sections and patch the binary to jump them. Then it'll force the decompiler to reanalyze the function. As most of the useless code will never be executed due to the added unconditionnal jumps, the decompilation is way more quicker.
+
+![create thread entry](https://raw.githubusercontent.com/heat-miser/tinynuke-toolset/main/screenshots/ThreadAddress.png?raw=true)
+
+The script is not perfect and noise remains, but it'll make the unpacking easier and faster with that added obfuscation. 
+
+![deobfuscated unxor](https://raw.githubusercontent.com/heat-miser/tinynuke-toolset/main/screenshots/rolling_xor_deobfuscated.png?raw=true)
+
+One last thing, in the latest version the rolling xor used to unpack the level 2 dll is not using directly the xor key but a pointer to the key, don't fall in that easy trap, and don't forget to give the correct address to the unpacking script or you'll end with junk instead of a DLL.
