@@ -15,7 +15,7 @@ def jumpit(beginning, end):
 
 def main():
     #Get the thread address
-    entry_address = toAddr(askString("Threat function", "enter the function called in the thread"))
+    entry_address = toAddr(askString("Thread function", "enter the function called in the thread"))
     function_end = None
 
     asm = Assemblers.getAssembler(currentProgram)
